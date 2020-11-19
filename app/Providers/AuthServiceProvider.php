@@ -27,5 +27,16 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
+
+        // Define scope, scope in api is just like setting permissions/roles
+        Passport::tokensCan([
+            'admin' => 'Add/Edit/Delete/Revoke Users Access',
+            'customer' => 'View Channels'
+        ]);
+
+        // Set default scope
+        Passport::setDefaultScope([
+            'customer'
+        ]);
     }
 }

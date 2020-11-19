@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'referral_id',
     ];
 
     /**
@@ -38,4 +38,12 @@ class User extends Authenticatable
         'created_at' => 'datetime',
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Used for api scope/access levels
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
 }
