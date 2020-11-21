@@ -20,3 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/paystack', 'Api\v1\PaymentController@index');
+Route::post('/pay', 'Api\v1\PaymentController@redirectToGateway')->name('pay');
+Route::get('/tran', 'Api\v1\PaymentController@genTranxRef'); 
+Route::get('/payment/callback', 'Api\v1\PaymentController@handleGatewayCallback');

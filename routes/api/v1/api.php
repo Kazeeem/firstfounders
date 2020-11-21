@@ -28,13 +28,12 @@ Route::prefix('/user')->group(function() {
     Route::get('/assign/role/{name}/{id}', 'Api\v1\UserController@giveRole');
     Route::get('/check/role/{id}', 'Api\v1\UserController@checkRole');
 
-    // Authentication
-    /*
-    Route::group(['middleware' => 'auth:api'], function() {
-        Route::get('/all', 'Api\v1\UserController@index')->middleware('scope:admin');
-        Route::get('/show/{id}', 'Api\v1\UserController@show')->middleware('scope:admin,customer');
-    }); */
+    // Paystack routes
+    Route::post('/pay', 'Api\v1\PaymentController@redirectToGateway')->name('pay');
+    Route::get('/tran', 'Api\v1\PaymentController@genTranxRef'); 
+    Route::get('/payment/callback', 'Api\v1\PaymentController@handleGatewayCallback');
 
+    // Authentication
     Route::get('/all', 'Api\v1\UserController@index')->middleware(['auth:api', 'scope:admin']);
     Route::get('/show/{id}', 'Api\v1\UserController@show')->middleware(['auth:api', 'scope:admin,customer']);
 });
