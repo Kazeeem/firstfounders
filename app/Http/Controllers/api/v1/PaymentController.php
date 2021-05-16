@@ -59,6 +59,8 @@ class PaymentController extends Controller
         $user_email = $response->data->customer->email;
         $transaction_reference = $response->data->reference;
 
+        
+
         dd($authorization_code, $card_expiry_month, $card_expiry_year, $card_type, $bank_name, $user_email, $transaction_reference);
         // Now you have the payment details,
         // you can store the authorization_code in your db to allow for recurrent subscriptions
